@@ -17,11 +17,8 @@ import {
 } from '@nipsys/lsd';
 import {
   ArrowSquareOut,
-  ChartLine,
   ChatCircleText,
   GitFork,
-  House,
-  Info,
   Lightning,
   Star,
   Trophy,
@@ -35,92 +32,92 @@ export default function NeoBrutalistLeaderboardPage() {
   const remainingAgents = platforms.filter(p => p.rank > 2);
 
   return (
-    <main className="flex flex-col h-screen bg-[var(--lsd-background)]">
-      {/* Top Menubar */}
-      <header className="sticky top-0 z-50 bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
-        <div className="flex items-center justify-between p-[var(--lsd-spacing-base)]">
-          <div className="flex items-center gap-[var(--lsd-spacing-large)]">
-            <Trophy size={32} className="text-[var(--lsd-primary)]" />
-            <div>
-              <h1 className="text-[var(--lsd-text-primary)] text-2xl font-bold">
-                Agent Leaderboard
-              </h1>
-              <p className="text-[var(--lsd-text-secondary)] text-sm">
-                Multi-channel AI orchestration platforms
-              </p>
+    <>
+      {/* Set theme and prevent body scroll */}
+      <style>{`
+        html {
+          overflow: hidden;
+        }
+        body {
+          overflow: hidden;
+        }
+      `}</style>
+
+      <main className="flex h-screen bg-[var(--lsd-background)]" data-theme="terracotta">
+        {/* Top Menubar */}
+        <header className="flex-shrink-0 bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
+          <div className="flex items-center justify-between p-[var(--lsd-spacing-base)]">
+            <div className="flex items-center gap-[var(--lsd-spacing-large)]">
+              <Trophy size={32} className="text-[var(--lsd-primary)]" />
+              <div>
+                <h1 className="text-[var(--lsd-text-primary)] text-2xl font-bold">
+                  Agent Leaderboard
+                </h1>
+                <p className="text-[var(--lsd-text-secondary)] text-sm">
+                  Multi-channel AI orchestration platforms
+                </p>
+              </div>
             </div>
+
+            <Menubar>
+              <MenubarMenu>
+                <MenubarTrigger>Home</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem asChild>
+                    <a href="/">LSD Demo</a>
+                  </MenubarItem>
+                  <MenubarItem asChild>
+                    <a href="/leaderboard">Standard</a>
+                  </MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem asChild>
+                    <a href="/leaderboard-creative">Creative</a>
+                  </MenubarItem>
+                  <MenubarItem asChild>
+                    <a href="/leaderboard-creative-2">Creative v2</a>
+                  </MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+
+              <MenubarMenu>
+                <MenubarTrigger>Analytics</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem>Platform Stats</MenubarItem>
+                  <MenubarItem>Market Trends</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem>GitHub Metrics</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+
+              <MenubarMenu>
+                <MenubarTrigger>About</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem asChild>
+                    <a
+                      href="https://github.com/AvariAI/lsd-nextjs-app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub Repository
+                    </a>
+                  </MenubarItem>
+                  <MenubarItem asChild>
+                    <a href="https://lsd.nipsys.dev" target="_blank" rel="noopener noreferrer">
+                      LSD Documentation
+                    </a>
+                  </MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
           </div>
+        </header>
 
-          <Menubar>
-            <MenubarMenu>
-              <MenubarTrigger>
-                <House size={20} />
-                <span className="ml-2">Home</span>
-              </MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem asChild>
-                  <a href="/">LSD Demo</a>
-                </MenubarItem>
-                <MenubarItem asChild>
-                  <a href="/leaderboard">Standard</a>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem asChild>
-                  <a href="/leaderboard-creative">Creative</a>
-                </MenubarItem>
-                <MenubarItem asChild>
-                  <a href="/leaderboard-creative-2">Creative v2</a>
-                </MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
+        {/* Main Content - Scrollable */}
+        <ScrollArea className="flex-1 p-[var(--lsd-spacing-large)] overflow-x-hidden">
+          <ScrollBar orientation="vertical" />
 
-            <MenubarMenu>
-              <MenubarTrigger>
-                <ChartLine size={20} />
-                <span className="ml-2">Analytics</span>
-              </MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem>Platform Stats</MenubarItem>
-                <MenubarItem>Market Trends</MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem>GitHub Metrics</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-
-            <MenubarMenu>
-              <MenubarTrigger>
-                <Info size={20} />
-                <span className="ml-2">About</span>
-              </MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem asChild>
-                  <a
-                    href="https://github.com/AvariAI/lsd-nextjs-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub Repository
-                  </a>
-                </MenubarItem>
-                <MenubarItem asChild>
-                  <a href="https://lsd.nipsys.dev" target="_blank" rel="noopener noreferrer">
-                    LSD Documentation
-                  </a>
-                </MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-          </Menubar>
-        </div>
-      </header>
-
-      {/* Main Content - Scrollable */}
-      <ScrollArea className="flex-1 p-[var(--lsd-spacing-large)]">
-        <ScrollBar orientation="vertical" />
-
-        <div className="max-w-7xl mx-auto space-y-[var(--lsd-spacing-large)]">
-          {/* Hero Grid - Large Card + Narrow Card */}
-          <ScrollArea>
-            <ScrollBar orientation="horizontal" />
+          <div className="max-w-7xl mx-auto space-y-[var(--lsd-spacing-large)]">
+            {/* Hero Grid - Large Card + Narrow Card */}
             <section className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--lsd-spacing-large)]">
               {/* Large Card - #1 Agent Desktop */}
               <div className="lg:col-span-2">
@@ -255,62 +252,62 @@ export default function NeoBrutalistLeaderboardPage() {
                 </Card>
               </div>
             </section>
-          </ScrollArea>
 
-          {/* Full Width Table Card - Remaining Agents */}
-          <section>
-            <Card>
-              <CardHeader className="border-b border-[var(--lsd-border)]">
-                <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
-                  <ChatCircleText size={28} className="text-[var(--lsd-primary)]" />
-                  <span className="text-2xl">All Platforms</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-0">
-                <ScrollArea>
-                  <table className="w-full">
-                    <thead>
-                      <tr className="bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
-                        <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Rank
-                        </th>
-                        <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Platform
-                        </th>
-                        <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Channels
-                        </th>
-                        <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Stars
-                        </th>
-                        <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Forks
-                        </th>
-                        <th className="text-right p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                          Actions
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {remainingAgents.map((platform, index) => (
-                        <AgentTableRow key={platform.rank} platform={platform} index={index} />
-                      ))}
-                    </tbody>
-                  </table>
-                  <ScrollBar orientation="horizontal" />
-                  <ScrollBar orientation="vertical" />
-                </ScrollArea>
-              </CardContent>
-            </Card>
-          </section>
+            {/* Full Width Table Card - Remaining Agents */}
+            <section>
+              <Card>
+                <CardHeader className="border-b border-[var(--lsd-border)]">
+                  <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
+                    <ChatCircleText size={28} className="text-[var(--lsd-primary)]" />
+                    <span className="text-2xl">All Platforms</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <ScrollArea className="overflow-hidden">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
+                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Rank
+                          </th>
+                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Platform
+                          </th>
+                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Channels
+                          </th>
+                          <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Stars
+                          </th>
+                          <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Forks
+                          </th>
+                          <th className="text-right p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {remainingAgents.map((platform, index) => (
+                          <AgentTableRow key={platform.rank} platform={platform} index={index} />
+                        ))}
+                      </tbody>
+                    </table>
+                    <ScrollBar orientation="horizontal" />
+                    <ScrollBar orientation="vertical" />
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            </section>
 
-          {/* Footer */}
-          <footer className="text-center text-[var(--lsd-text-secondary)] text-sm">
-            <p>Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024</p>
-          </footer>
-        </div>
-      </ScrollArea>
-    </main>
+            {/* Footer */}
+            <footer className="text-center text-[var(--lsd-text-secondary)] text-sm">
+              <p>Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024</p>
+            </footer>
+          </div>
+        </ScrollArea>
+      </main>
+    </>
   );
 }
 
