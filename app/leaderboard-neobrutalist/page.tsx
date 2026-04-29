@@ -17,7 +17,6 @@ export default function NeoBrutalistLeaderboardPage() {
   const topAgent = platforms.find(p => p.rank === 1);
   const secondAgent = platforms.find(p => p.rank === 2);
   const nextFiveAgents = platforms.filter(p => p.rank >= 3 && p.rank <= 7);
-  const remainingAgents = platforms.filter(p => p.rank > 7);
 
   // Set theme and hide scrollbars
   useEffect(() => {
@@ -220,38 +219,13 @@ export default function NeoBrutalistLeaderboardPage() {
                 <PlatformCard key={platform.rank} platform={platform} />
               ))}
             </div>
-
-            {/* Remaining platforms as simple list */}
-            {remainingAgents.length > 0 && (
-              <div className="mt-8">
-                <h4 className="text-sm font-semibold text-[var(--lsd-text-secondary)] mb-4">
-                  Other Platforms
-                </h4>
-                <div className="flex flex-wrap gap-3">
-                  {remainingAgents.map(platform => (
-                    <a
-                      key={platform.rank}
-                      href={platform.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-2 bg-[var(--lsd-surface)] rounded-lg text-sm text-[var(--lsd-text-primary)] hover:bg-[var(--lsd-primary)] hover:text-white transition-colors"
-                    >
-                      <span className="font-medium">#{platform.rank}</span>
-                      <span>{platform.name}</span>
-                      <Star size={12} />
-                      <span>{platform.stars.toLocaleString()}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </section>
 
         {/* Footer */}
         <footer className="flex-shrink-0 bg-[var(--lsd-surface)] border-t border-[var(--lsd-border)] py-4 px-8">
           <div className="max-w-7xl mx-auto text-center text-sm text-[var(--lsd-text-secondary)]">
-            Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024
+            Powered by @nipsys/lsd • Data from GitHub API • Updated Apr 2026
           </div>
         </footer>
       </div>
