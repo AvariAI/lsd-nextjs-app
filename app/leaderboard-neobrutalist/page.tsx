@@ -38,6 +38,28 @@ export default function NeoBrutalistLeaderboardPage() {
     document.documentElement.setAttribute('data-theme', 'terracotta');
     document.body.style.overflow = 'hidden';
 
+    // Hide scrollbars on scroll areas
+    const scrollAreaViewport = document.querySelector(
+      '[data-radix-scroll-area-viewport]'
+    ) as HTMLElement;
+    if (scrollAreaViewport) {
+      scrollAreaViewport.style.setProperty('scrollbar-width', 'none');
+      scrollAreaViewport.style.setProperty('-ms-overflow-style', 'none');
+
+      // Add style tag to hide webkit scrollbars
+      const styleTag = document.createElement('style');
+      styleTag.textContent = `
+        [data-radix-scroll-area-viewport]::-webkit-scrollbar {
+          display: none;
+        }
+      `;
+      document.head.appendChild(styleTag);
+
+      return () => {
+        document.head.removeChild(styleTag);
+      };
+    }
+
     return () => {
       document.documentElement.style.overflow = '';
       document.documentElement.removeAttribute('data-theme');
