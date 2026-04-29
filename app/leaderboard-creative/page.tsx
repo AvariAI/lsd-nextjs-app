@@ -12,6 +12,12 @@ import {
 } from '@phosphor-icons/react';
 import { type Platform, platforms } from '@/data/platforms';
 
+function RankMedal({ rank }: { rank: number }) {
+  if (rank === 2) return <span className="ml-2 text-2xl">🥈</span>;
+  if (rank === 3) return <span className="ml-2 text-2xl">🥉</span>;
+  return null;
+}
+
 export default function LeaderboardPage() {
   return (
     <main className="min-h-screen bg-[var(--lsd-background)] p-[var(--lsd-spacing-largest)] overflow-hidden">
@@ -73,7 +79,7 @@ export default function LeaderboardPage() {
                   color="text-green-500"
                 />
                 <div className="flex items-center gap-[var(--lsd-spacing-base)]">
-                  <Button variant="filled" size="lg" asChild>
+                  <Button variant="filled" asChild>
                     <a
                       href={platforms[0].url}
                       target="_blank"
@@ -95,7 +101,7 @@ export default function LeaderboardPage() {
           <div className="mb-[var(--lsd-spacing-large)]">
             <div className="flex items-center gap-[var(--lsd-spacing-small)]">
               <TrendUp size={24} className="text-[var(--lsd-primary)]" />
-              <h2 className="font-[var(--font-display)] text-3xl font-bold text-[var(--lsd-text-primary)]">
+              <h2 className="font-[var(--font-display)] text-4xl font-bold text-[var(--lsd-text-primary)]">
                 Future Challengers
               </h2>
             </div>
@@ -112,7 +118,7 @@ export default function LeaderboardPage() {
         </section>
 
         {/* Footer */}
-        <footer className="mt-[var(--lsd-spacing-epic)] pt-[var(--lsd-spacing-large)] border-t border-[var(--lsd-border)]">
+        <footer className="mt-[var(--lsd-spacing-epic)] pt-[var(--lsd-spacing-large)] border-t border-[var(--lsd-border)] text-center">
           <div className="text-center text-[var(--lsd-text-secondary)] text-sm">
             <p className="font-[var(--font-body)]">
               Multi-Channel AI Gateway Leaderboard • {platforms.length} Platforms Ranked
@@ -175,8 +181,8 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
 
       {/* Card Content */}
       <div
-        className={`ml-12 pl-[var(--lsd-spacing-large)] border-l-2 ${
-          isPodium ? 'border-[var(--lsd-primary)]' : 'border-[var(--lsd-border)]'
+        className={`ml-12 pl-[var(--lsd-spacing-large)] ${
+          rank <= 4 ? 'border-l-2 border-[var(--lsd-primary)]' : ''
         } py-[var(--lsd-spacing-large)]`}
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-[var(--lsd-spacing-base)] items-center">
@@ -189,6 +195,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
                 {platform.name}
               </h3>
               {isPodium && <Crown size={20} className="text-[var(--lsd-warning)]" />}
+              <RankMedal rank={rank} />
               <span className="text-xs px-3 py-1 bg-[var(--lsd-surface)] border border-[var(--lsd-border)] rounded-full font-mono uppercase tracking-wider">
                 {platform.language}
               </span>
