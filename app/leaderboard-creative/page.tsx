@@ -182,7 +182,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
       {/* Card Content */}
       <div
         className={`ml-12 pl-[var(--lsd-spacing-large)] ${
-          rank <= 4 ? 'border-l-2 border-[var(--lsd-primary)]' : ''
+          rank <= 5 ? 'border-l-2 border-[var(--lsd-primary)]' : ''
         } py-[var(--lsd-spacing-large)]`}
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-[var(--lsd-spacing-base)] items-center">
