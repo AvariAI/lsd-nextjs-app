@@ -26,9 +26,12 @@ export default function Home() {
             A modern design system integrated with Next.js, TypeScript, and TailwindCSS v4.
             Featuring 39 accessible, monochromatic components.
           </p>
-          <div className="flex gap-[var(--lsd-spacing-smaller)] justify-center">
+          <div className="flex gap-[var(--lsd-spacing-smaller)] justify-center flex-wrap">
             <Link href="/leaderboard">
-              <Button variant="filled">View AI Gateway Leaderboard</Button>
+              <Button variant="filled">Standard Leaderboard</Button>
+            </Link>
+            <Link href="/leaderboard-creative">
+              <Button variant="filled">Creative Leaderboard</Button>
             </Link>
             <Button variant="outlined">Learn More</Button>
           </div>

@@ -6,8 +6,20 @@ import { type Platform, platforms } from '@/data/platforms';
 
 export default function LeaderboardPage() {
   return (
-    <main className="min-h-screen bg-[var(--lsd-background)] p-[var(--lsd-spacing-largest)]">
-      <div className="max-w-7xl mx-auto">
+    <main className="min-h-screen bg-[var(--lsd-background)] p-[var(--lsd-spacing-largest)] overflow-hidden">
+      {/* Decorative Grid Background */}
+      <div
+        className="fixed inset-0 opacity-5 pointer-events-none"
+        style={{
+          backgroundImage: `
+          linear-gradient(to right, var(--lsd-border) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--lsd-border) 1px, transparent 1px)
+        `,
+          backgroundSize: '64px 64px',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto relative">
         {/* Header */}
         <section className="mb-[var(--lsd-spacing-largest)] text-center">
           <h1 className="text-[var(--lsd-text-primary)] text-4xl font-bold mb-[var(--lsd-spacing-base)]">
