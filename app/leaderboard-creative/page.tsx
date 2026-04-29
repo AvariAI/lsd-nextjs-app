@@ -32,7 +32,7 @@ export default function LeaderboardPage() {
         <section className="mb-[var(--lsd-spacing-massive)]">
           <div className="relative">
             {/* Giant Rank #1 */}
-            <div className="absolute -top-32 -left-20 text-[length:20rem] font-bold text-[var(--lsd-border)] opacity-30 select-none">
+            <div className="absolute -top-24 -right-20 text-[length:12rem] font-bold text-[var(--lsd-border)] opacity-20 select-none">
               #01
             </div>
 
