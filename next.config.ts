@@ -1,7 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
+  assetsPrefix: '/lsd-nextjs-app',
+  basePath: '/lsd-nextjs-app',
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
