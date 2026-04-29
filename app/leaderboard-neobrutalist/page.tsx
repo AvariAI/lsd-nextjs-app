@@ -2,37 +2,24 @@
 
 import {
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarSeparator,
   MenubarTrigger,
-  ScrollArea,
-  ScrollBar,
 } from '@nipsys/lsd';
-import {
-  ArrowSquareOut,
-  ChatCircleText,
-  GitFork,
-  Lightning,
-  Star,
-  Trophy,
-  Users,
-} from '@phosphor-icons/react';
+import { ArrowSquareOut, ChatCircleText, GitFork, Star, Trophy } from '@phosphor-icons/react';
 import { useEffect } from 'react';
 import { type Platform, platforms } from '@/data/platforms';
 
 export default function NeoBrutalistLeaderboardPage() {
   const topAgent = platforms.find(p => p.rank === 1);
-  const hermesAgent = platforms.find(p => p.name === 'Hermes');
-  const remainingAgents = platforms.filter(p => p.rank > 2);
+  const secondAgent = platforms.find(p => p.rank === 2);
+  const nextFiveAgents = platforms.filter(p => p.rank >= 3 && p.rank <= 7);
+  const remainingAgents = platforms.filter(p => p.rank > 7);
 
-  // Set overflow hidden on html and body to prevent native scrollbars
+  // Set theme and hide scrollbars
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
     document.documentElement.setAttribute('data-theme', 'terracotta');
@@ -47,42 +34,32 @@ export default function NeoBrutalistLeaderboardPage() {
 
   return (
     <>
-      {/* Global styles to hide scrollbars */}
+      {/* Global styles */}
       <style>
         {`
           html, body {
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
           }
-          body::-webkit-scrollbar,
-          html::-webkit-scrollbar,
-          [data-radix-scroll-area-viewport]::-webkit-scrollbar {
+          ::-webkit-scrollbar {
             display: none !important;
-            -webkit-appearance: none;
-          }
-          [data-radix-scroll-area-viewport] {
-            scrollbar-width: none !important;
-            -ms-overflow-style: none !important;
           }
         `}
       </style>
 
-      <main className="flex h-screen bg-[var(--lsd-background)]">
-        {/* Top Menubar */}
-        <header className="flex-shrink-0 bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
-          <div className="flex items-center justify-between p-[var(--lsd-spacing-base)]">
-            <div className="flex items-center gap-[var(--lsd-spacing-large)]">
-              <Trophy size={32} className="text-[var(--lsd-primary)]" />
-              <div>
-                <h1 className="text-[var(--lsd-text-primary)] text-2xl font-bold">
-                  Agent Leaderboard
-                </h1>
-                <p className="text-[var(--lsd-text-secondary)] text-sm">
-                  Multi-channel AI orchestration platforms
-                </p>
-              </div>
+      <div className="min-h-screen flex flex-col bg-[var(--lsd-background)]">
+        {/* Top Navigation Bar */}
+        <header className="flex-shrink-0 bg-white border-b border-[var(--lsd-border)]">
+          <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <Trophy size={28} className="text-[var(--lsd-primary)]" />
+              <span className="text-xl font-bold text-[var(--lsd-text-primary)]">
+                Agent Leaderboard
+              </span>
             </div>
 
+            {/* Navigation */}
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger>Home</MenubarTrigger>
@@ -136,280 +113,218 @@ export default function NeoBrutalistLeaderboardPage() {
           </div>
         </header>
 
-        {/* Main Content - Scrollable */}
-        <ScrollArea className="flex-1 p-[var(--lsd-spacing-large)] overflow-x-hidden">
-          <ScrollBar orientation="vertical" />
-
-          <div className="max-w-7xl mx-auto space-y-[var(--lsd-spacing-large)]">
-            {/* Hero Grid - Large Card + Narrow Card */}
-            <section className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--lsd-spacing-large)]">
-              {/* Large Card - #1 Agent Desktop */}
-              <div className="lg:col-span-2">
-                <Card>
-                  <CardHeader className="border-b border-[var(--lsd-border)]">
-                    <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
-                      <Trophy size={32} className="text-[var(--lsd-primary)]" />
-                      <span className="text-2xl">Market Leader</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-[var(--lsd-spacing-large)]">
-                    <div className="space-y-[var(--lsd-spacing-base)]">
-                      {/* Rank Badge */}
-                      <div className="flex items-center gap-[var(--lsd-spacing-sm)]">
-                        <div className="bg-[var(--lsd-primary)] text-white px-4 py-2 rounded-lg">
-                          <span className="text-3xl font-bold">#1</span>
-                        </div>
-                        <span className="text-[var(--lsd-text-secondary)]">
-                          Dominates personal agent market
-                        </span>
-                      </div>
-
-                      {/* Agent Info */}
-                      <div>
-                        <h2 className="text-[var(--lsd-text-primary)] text-4xl font-bold mb-[var(--lsd-spacing-sm)]">
-                          {topAgent?.name}
-                        </h2>
-                        <p className="text-[var(--lsd-text-secondary)] text-lg">
-                          {topAgent?.description}
-                        </p>
-                      </div>
-
-                      {/* Key Metrics */}
-                      <div className="grid grid-cols-3 gap-[var(--lsd-spacing-base)] pt-[var(--lsd-spacing-base)] border-t border-[var(--lsd-border)]">
-                        <div className="text-center">
-                          <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
-                            <Star size={24} />
-                          </div>
-                          <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
-                            {topAgent?.stars.toLocaleString()}
-                          </div>
-                          <div className="text-sm text-[var(--lsd-text-secondary)]">
-                            GitHub Stars
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
-                            <GitFork size={24} />
-                          </div>
-                          <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
-                            {topAgent?.forks.toLocaleString()}
-                          </div>
-                          <div className="text-sm text-[var(--lsd-text-secondary)]">Forks</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
-                            <ChatCircleText size={24} />
-                          </div>
-                          <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
-                            {topAgent?.channelCount}
-                          </div>
-                          <div className="text-sm text-[var(--lsd-text-secondary)]">Platforms</div>
-                        </div>
-                      </div>
-
-                      {/* Action */}
-                      <a href={topAgent?.url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="filled" size="lg" className="w-full">
-                          View {topAgent?.name} Repository
-                          <ArrowSquareOut size={18} />
-                        </Button>
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
+        {/* Hero Section - #1 Platform */}
+        <section className="bg-white py-16 px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              {/* Left - Big Title */}
+              <div className="lg:w-1/2 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 bg-[var(--lsd-primary)] text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+                  <Trophy size={16} />
+                  MARKET LEADER
+                </div>
+                <h1 className="text-6xl font-bold text-[var(--lsd-text-primary)] mb-4 tracking-tight">
+                  {topAgent?.name}
+                </h1>
+                <p className="text-2xl text-[var(--lsd-text-secondary)] mb-8">
+                  {topAgent?.description}
+                </p>
+                <div className="flex gap-4 justify-center lg:justify-start">
+                  <a href={topAgent?.url} target="_blank" rel="noopener noreferrer">
+                    <Button variant="filled" size="lg">
+                      View Repository
+                      <ArrowSquareOut size={18} />
+                    </Button>
+                  </a>
+                </div>
               </div>
 
-              {/* Narrow Card - Hermes Market Stats */}
-              <div>
-                <Card>
-                  <CardHeader className="border-b border-[var(--lsd-border)]">
-                    <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
-                      <Lightning size={24} className="text-[var(--lsd-primary)]" />
-                      <span className="text-xl">Market Stats</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-[var(--lsd-spacing-large)]">
-                    <div className="space-y-[var(--lsd-spacing-base)]">
-                      {/* Hermes Highlight */}
-                      <div className="bg-[var(--lsd-surface)] border border-[var(--lsd-border)] rounded-lg p-[var(--lsd-spacing-base)]">
-                        <h3 className="text-[var(--lsd-text-primary)] text-xl font-bold mb-2">
-                          {hermesAgent?.name}
-                        </h3>
-                        <p className="text-[var(--lsd-text-secondary)] text-sm mb-2">
-                          {hermesAgent?.description}
-                        </p>
-                        <div className="flex items-center gap-[var(--lsd-spacing-xs)]">
-                          <Star size={16} className="text-[var(--lsd-primary)]" />
-                          <span className="text-[var(--lsd-text-primary)] font-semibold">
-                            {hermesAgent?.stars.toLocaleString()} stars
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Market Stats */}
-                      <div className="space-y-[var(--lsd-spacing-sm)]">
-                        <StatItem
-                          label="Total Agents"
-                          value={platforms.length.toString()}
-                          icon={<Users size={20} />}
-                        />
-                        <StatItem
-                          label="Total Stars"
-                          value={platforms.reduce((sum, p) => sum + p.stars, 0).toLocaleString()}
-                          icon={<Star size={20} />}
-                        />
-                        <StatItem
-                          label="Total Forks"
-                          value={platforms.reduce((sum, p) => sum + p.forks, 0).toLocaleString()}
-                          icon={<GitFork size={20} />}
-                        />
-                        <StatItem
-                          label="Avg Platforms"
-                          value={(
-                            platforms.reduce((sum, p) => sum + p.channelCount, 0) / platforms.length
-                          ).toFixed(1)}
-                          icon={<ChatCircleText size={20} />}
-                        />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+              {/* Right - Key Stats */}
+              <div className="lg:w-1/2 grid grid-cols-2 gap-6">
+                <StatCard
+                  label="GitHub Stars"
+                  value={topAgent?.stars.toLocaleString() || '0'}
+                  icon={<Star size={24} />}
+                  highlight
+                />
+                <StatCard
+                  label="Forks"
+                  value={topAgent?.forks.toLocaleString() || '0'}
+                  icon={<GitFork size={24} />}
+                />
+                <StatCard
+                  label="Platforms"
+                  value={topAgent?.channelCount.toString() || '0'}
+                  icon={<ChatCircleText size={24} />}
+                />
+                <StatCard label="Rank" value="#1" icon={<Trophy size={24} />} highlight />
               </div>
-            </section>
-
-            {/* Full Width Table Card - Remaining Agents */}
-            <section>
-              <Card>
-                <CardHeader className="border-b border-[var(--lsd-border)]">
-                  <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
-                    <ChatCircleText size={28} className="text-[var(--lsd-primary)]" />
-                    <span className="text-2xl">All Platforms</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <ScrollArea className="overflow-hidden">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
-                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Rank
-                          </th>
-                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Platform
-                          </th>
-                          <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Channels
-                          </th>
-                          <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Stars
-                          </th>
-                          <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Forks
-                          </th>
-                          <th className="text-right p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
-                            Actions
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {remainingAgents.map((platform, index) => (
-                          <AgentTableRow key={platform.rank} platform={platform} index={index} />
-                        ))}
-                      </tbody>
-                    </table>
-                    <ScrollBar orientation="horizontal" />
-                    <ScrollBar orientation="vertical" />
-                  </ScrollArea>
-                </CardContent>
-              </Card>
-            </section>
-
-            {/* Footer */}
-            <footer className="text-center text-[var(--lsd-text-secondary)] text-sm">
-              <p>Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024</p>
-            </footer>
+            </div>
           </div>
-        </ScrollArea>
-      </main>
+        </section>
+
+        {/* Dark Dashboard Section - #2 Platform */}
+        <section className="bg-[var(--lsd-surface)] py-12 px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-start gap-8">
+              {/* Left - Platform Info */}
+              <div className="lg:w-1/3">
+                <div className="text-sm text-[var(--lsd-text-secondary)] mb-2">RUNNER UP</div>
+                <h2 className="text-4xl font-bold text-[var(--lsd-text-primary)] mb-3">
+                  {secondAgent?.name}
+                </h2>
+                <p className="text-[var(--lsd-text-secondary)] mb-6">{secondAgent?.description}</p>
+                <a href={secondAgent?.url} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outlined" size="md">
+                    View Repository
+                    <ArrowSquareOut size={16} />
+                  </Button>
+                </a>
+              </div>
+
+              {/* Right - Dashboard Metrics */}
+              <div className="lg:w-2/3 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <DashboardMetric
+                  label="Stars"
+                  value={secondAgent?.stars.toLocaleString() || '0'}
+                  subtext="GitHub"
+                />
+                <DashboardMetric
+                  label="Forks"
+                  value={secondAgent?.forks.toLocaleString() || '0'}
+                  subtext="Community"
+                />
+                <DashboardMetric
+                  label="Channels"
+                  value={secondAgent?.channelCount.toString() || '0'}
+                  subtext="Platforms"
+                />
+                <DashboardMetric
+                  label="Market Share"
+                  value={`${Math.round(((secondAgent?.stars || 0) / platforms.reduce((s, p) => s + p.stars, 0)) * 100)}%`}
+                  subtext="of total stars"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom 5 Cards - Platforms #3-7 */}
+        <section className="bg-[var(--lsd-background)] py-12 px-8 flex-1">
+          <div className="max-w-7xl mx-auto">
+            <h3 className="text-lg font-semibold text-[var(--lsd-text-primary)] mb-6">
+              Emerging Platforms
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {nextFiveAgents.map(platform => (
+                <PlatformCard key={platform.rank} platform={platform} />
+              ))}
+            </div>
+
+            {/* Remaining platforms as simple list */}
+            {remainingAgents.length > 0 && (
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold text-[var(--lsd-text-secondary)] mb-4">
+                  Other Platforms
+                </h4>
+                <div className="flex flex-wrap gap-3">
+                  {remainingAgents.map(platform => (
+                    <a
+                      key={platform.rank}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-2 bg-[var(--lsd-surface)] rounded-lg text-sm text-[var(--lsd-text-primary)] hover:bg-[var(--lsd-primary)] hover:text-white transition-colors"
+                    >
+                      <span className="font-medium">#{platform.rank}</span>
+                      <span>{platform.name}</span>
+                      <Star size={12} />
+                      <span>{platform.stars.toLocaleString()}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="flex-shrink-0 bg-[var(--lsd-surface)] border-t border-[var(--lsd-border)] py-4 px-8">
+          <div className="max-w-7xl mx-auto text-center text-sm text-[var(--lsd-text-secondary)]">
+            Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024
+          </div>
+        </footer>
+      </div>
     </>
   );
 }
 
-interface StatItemProps {
+// Hero stat card
+function StatCard({
+  label,
+  value,
+  icon,
+  highlight = false,
+}: {
   label: string;
   value: string;
   icon: React.ReactNode;
-}
+  highlight?: boolean;
+}) {
+  const bgClass = highlight ? 'bg-[var(--lsd-primary)] text-white' : 'bg-[var(--lsd-surface)]';
+  const iconColor = highlight ? 'text-white' : 'text-[var(--lsd-primary)]';
+  const textColor = highlight ? 'text-white' : 'text-[var(--lsd-text-primary)]';
+  const subColor = highlight ? 'text-white/80' : 'text-[var(--lsd-text-secondary)]';
 
-function StatItem({ label, value, icon }: StatItemProps) {
   return (
-    <div className="flex items-center justify-between p-[var(--lsd-spacing-xs)] border-b border-[var(--lsd-border)]">
-      <div className="flex items-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-secondary)]">
-        <span className="text-[var(--lsd-primary)]">{icon}</span>
-        <span className="text-sm">{label}</span>
-      </div>
-      <span className="text-[var(--lsd-text-primary)] font-semibold">{value}</span>
+    <div className={`p-6 rounded-xl ${bgClass}`}>
+      <div className={`mb-2 ${iconColor}`}>{icon}</div>
+      <div className={`text-3xl font-bold mb-1 ${textColor}`}>{value}</div>
+      <div className={`text-sm ${subColor}`}>{label}</div>
     </div>
   );
 }
 
-interface AgentTableRowProps {
-  platform: Platform;
-  index: number;
+// Dashboard metric
+function DashboardMetric({
+  label,
+  value,
+  subtext,
+}: {
+  label: string;
+  value: string;
+  subtext: string;
+}) {
+  return (
+    <div className="bg-[var(--lsd-background)] rounded-lg p-4 border border-[var(--lsd-border)]">
+      <div className="text-xs text-[var(--lsd-text-secondary)] mb-1">{label}</div>
+      <div className="text-2xl font-bold text-[var(--lsd-text-primary)]">{value}</div>
+      <div className="text-xs text-[var(--lsd-text-secondary)]">{subtext}</div>
+    </div>
+  );
 }
 
-function AgentTableRow({ platform, index }: AgentTableRowProps) {
-  const isLast = index === platform.rank - 3;
-
+// Platform card for bottom section
+function PlatformCard({ platform }: { platform: Platform }) {
   return (
-    <tr className={`border-b border-[var(--lsd-border)] ${isLast ? 'border-b-0' : ''}`}>
-      {/* Rank */}
-      <td className="p-[var(--lsd-spacing-base)]">
-        <span className="text-[var(--lsd-text-primary)] font-bold">#{platform.rank}</span>
-      </td>
-
-      {/* Platform Info */}
-      <td className="p-[var(--lsd-spacing-base)]">
-        <div className="space-y-[var(--lsd-spacing-xs)]">
-          <h3 className="text-[var(--lsd-text-primary)] font-semibold">{platform.name}</h3>
-          <p className="text-[var(--lsd-text-secondary)] text-sm line-clamp-2">
-            {platform.description}
-          </p>
-        </div>
-      </td>
-
-      {/* Channels */}
-      <td className="p-[var(--lsd-spacing-base)]">
-        <span className="text-[var(--lsd-text-primary)] text-sm">
-          {platform.channelCount} platforms
-        </span>
-      </td>
-
-      {/* Stars */}
-      <td className="p-[var(--lsd-spacing-base)] text-center">
-        <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-primary)]">
-          <Star size={16} className="text-[var(--lsd-primary)]" />
-          <span className="font-semibold">{platform.stars.toLocaleString()}</span>
-        </div>
-      </td>
-
-      {/* Forks */}
-      <td className="p-[var(--lsd-spacing-base)] text-center">
-        <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-primary)]">
-          <GitFork size={16} className="text-[var(--lsd-primary)]" />
-          <span className="font-semibold">{platform.forks.toLocaleString()}</span>
-        </div>
-      </td>
-
-      {/* Actions */}
-      <td className="p-[var(--lsd-spacing-base)] text-right">
-        <a href={platform.url} target="_blank" rel="noopener noreferrer">
-          <Button variant="outlined" size="sm">
-            View
-            <ArrowSquareOut size={14} />
-          </Button>
-        </a>
-      </td>
-    </tr>
+    <a
+      href={platform.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block p-4 bg-[var(--lsd-surface)] rounded-xl border border-[var(--lsd-border)] hover:border-[var(--lsd-primary)] transition-colors group"
+    >
+      <div className="text-xs text-[var(--lsd-text-secondary)] mb-1">#{platform.rank}</div>
+      <div className="font-semibold text-[var(--lsd-text-primary)] mb-2 group-hover:text-[var(--lsd-primary)]">
+        {platform.name}
+      </div>
+      <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-secondary)]">
+        <Star size={12} />
+        <span>{platform.stars.toLocaleString()}</span>
+      </div>
+      <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-secondary)] mt-1">
+        <ChatCircleText size={12} />
+        <span>{platform.channelCount} platforms</span>
+      </div>
+    </a>
   );
 }
