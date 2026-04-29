@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LSD + Next.js Demo
 
-## Getting Started
+A modern design system demo showcasing [LSD (@nipsys/lsd)](https://lsd.nipsys.dev) integrated with Next.js, TypeScript, and TailwindCSS v4.
 
-First, run the development server:
+## 🚀 Live Demo
+
+Visit the demo site: https://avariai.github.io/lsd-nextjs-app/
+
+## ✨ Features
+
+- **LSD Components**: Demo of multiple LSD components (Button, Card, Badge, Alert)
+- **Type-Safe**: Full TypeScript integration with LSD type definitions
+- **Modern Stack**: Next.js 16, React 19, TailwindCSS v4
+- **Quality Gates**: Biome.js linting and Lefthook git hooks
+- **Static Export**: Optimized for GitHub Pages deployment
+
+## 🛠️ Tech Stack
+
+- Next.js 16.2.4
+- React 19.2.4
+- TypeScript 5+
+- TailwindCSS v4
+- LSD (@nipsys/lsd) 1.0.1
+- Biome.js (linting/formatting)
+- Lefthook (git hooks)
+
+## 📦 Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/AvariAI/lsd-nextjs-app.git
+cd lsd-nextjs-app
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Building
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Run linting
+npm run lint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Fix linting issues
+npm run lint:fix
 
-## Learn More
+# Build for production
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# Start production server
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Quality Gates
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The project uses Lefthook with pre-commit and pre-push hooks:
 
-## Deploy on Vercel
+- **Pre-commit**: Runs Biome linting - blocks commits with lint errors
+- **Pre-push**: Runs build - blocks push if build fails
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Conventional Commits
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project uses Commitlint with conventional commits:
+
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `style:` Code style changes
+- `refactor:` Code refactoring
+- `perf:` Performance improvements
+- `test:` Test additions/changes
+- `build:` Build system changes
+- `ci:` CI/CD changes
+- `chore:` Maintenance tasks
+
+## 🎨 LSD Usage
+
+The demo follows LSD conventions:
+
+```tsx
+// LSD spacing variables (not Tailwind numbers)
+className="mt-[var(--lsd-spacing-lg)]"
+
+// LSD color tokens (not hex values)
+className="text-[var(--lsd-primary)]"
+
+// Proper icon suffix
+import { CheckIcon } from '@phosphor-icons/react'
+
+// Button variants (outlined, not outline)
+<Button variant="outlined">Click me</Button>
+
+// Badge variants
+<Badge variant="info">Info</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="destructive">Error</Badge>
+```
+
+## 🚀 Deployment
+
+The project is configured for GitHub Pages:
+
+- Static export enabled in `next.config.ts`
+- Base path set to `/lsd-nextjs-app`
+- Deployed from the `main` branch
+
+Manual deployment:
+
+```bash
+# Build the static export
+npm run build
+
+# Commit and push
+git add .
+git commit -m "feat: deploy update"
+git push origin main
+```
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🔗 Links
+
+- [LSD Documentation](https://lsd.nipsys.dev)
+- [LSD GitHub Repository](https://github.com/nipsysdev/lsd)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+
+---
+
+Built with ❤️ using [LSD](https://lsd.nipsys.dev) - Substance over Spectacle
