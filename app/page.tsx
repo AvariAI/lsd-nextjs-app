@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@nipsys/lsd';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -26,7 +27,9 @@ export default function Home() {
             Featuring 39 accessible, monochromatic components.
           </p>
           <div className="flex gap-[var(--lsd-spacing-smaller)] justify-center">
-            <Button variant="filled">Get Started</Button>
+            <Link href="/leaderboard">
+              <Button variant="filled">View AI Gateway Leaderboard</Button>
+            </Link>
             <Button variant="outlined">Learn More</Button>
           </div>
         </div>
