@@ -18,16 +18,11 @@ export default function NeoBrutalistLeaderboardPage() {
   const secondAgent = platforms.find(p => p.rank === 2);
   const nextFiveAgents = platforms.filter(p => p.rank >= 3 && p.rank <= 7);
 
-  // Set theme and hide scrollbars
+  // Set theme
   useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
     document.documentElement.setAttribute('data-theme', 'terracotta');
-    document.body.style.overflow = 'hidden';
-
     return () => {
-      document.documentElement.style.overflow = '';
       document.documentElement.removeAttribute('data-theme');
-      document.body.style.overflow = '';
     };
   }, []);
 
