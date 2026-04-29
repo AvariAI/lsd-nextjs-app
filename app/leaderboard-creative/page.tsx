@@ -37,7 +37,7 @@ export default function LeaderboardPage() {
             </div>
 
             <div className="relative z-10">
-              <div className="flex items-center gap-[var(--lsd-spacing-sm)] mb-[var(--lsd-spacing-base)]">
+              <div className="flex items-center gap-[var(--lsd-spacing-small)] mb-[var(--lsd-spacing-base)]">
                 <span className="text-[var(--lsd-primary)] font-bold tracking-widest uppercase text-sm">
                   Champion Platform
                 </span>
@@ -78,7 +78,7 @@ export default function LeaderboardPage() {
                       href={platforms[0].url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-[var(--lsd-spacing-sm)]"
+                      className="flex items-center gap-[var(--lsd-spacing-small)]"
                     >
                       View Repository
                       <ArrowSquareOut size={20} />
@@ -93,13 +93,13 @@ export default function LeaderboardPage() {
         {/* Rankings 2-10 */}
         <section>
           <div className="mb-[var(--lsd-spacing-large)]">
-            <div className="flex items-center gap-[var(--lsd-spacing-sm)]">
+            <div className="flex items-center gap-[var(--lsd-spacing-small)]">
               <TrendUp size={24} className="text-[var(--lsd-primary)]" />
               <h2 className="font-[var(--font-display)] text-3xl font-bold text-[var(--lsd-text-primary)]">
                 Future Challengers
               </h2>
             </div>
-            <p className="text-[var(--lsd-text-secondary)] mt-[var(--lsd-spacing-sm)]">
+            <p className="text-[var(--lsd-text-secondary)] mt-[var(--lsd-spacing-small)]">
               Rising stars in the multi-channel AI gateway ecosystem
             </p>
           </div>
@@ -117,7 +117,7 @@ export default function LeaderboardPage() {
             <p className="font-[var(--font-body)]">
               Multi-Channel AI Gateway Leaderboard • {platforms.length} Platforms Ranked
             </p>
-            <p className="mt-[var(--lsd-spacing-xs)] text-xs">
+            <p className="mt-[var(--lsd-spacing-smallest)] text-xs">
               Powered by @nipsys/lsd • Data from GitHub API
             </p>
           </div>
@@ -140,10 +140,10 @@ function ChampionStat({
 }) {
   return (
     <div className="text-center">
-      <div className={`${color} flex justify-center mb-[var(--lsd-spacing-sm)]`}>
+      <div className={`${color} flex justify-center mb-[var(--lsd-spacing-small)]`}>
         <Icon size={32} />
       </div>
-      <div className="font-[var(--font-display)] text-4xl font-black text-[var(--lsd-text-primary)] mb-[var(--lsd-spacing-xs)]">
+      <div className="font-[var(--font-display)] text-4xl font-black text-[var(--lsd-text-primary)] mb-[var(--lsd-spacing-smallest)]">
         {value}
       </div>
       <div className="text-[var(--lsd-text-secondary)] text-sm font-medium">{label}</div>
@@ -182,7 +182,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-[var(--lsd-spacing-base)] items-center">
           {/* Platform Info */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-[var(--lsd-spacing-sm)] mb-[var(--lsd-spacing-xs)]">
+            <div className="flex items-center gap-[var(--lsd-spacing-small)] mb-[var(--lsd-spacing-smallest)]">
               <h3
                 className={`font-[var(--font-display)] text-2xl font-bold text-[var(--lsd-text-primary)] ${isPodium ? 'text-[var(--lsd-primary)]' : ''}`}
               >
@@ -200,7 +200,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
 
           {/* Channels */}
           <div className="lg:col-span-3">
-            <div className="flex flex-wrap gap-[var(--lsd-spacing-xs)]">
+            <div className="flex flex-wrap gap-[var(--lsd-spacing-smallest)]">
               {platform.channels.slice(0, 4).map(channel => (
                 <span
                   key={channel}
@@ -229,7 +229,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
               href={platform.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-[var(--lsd-spacing-sm)]"
+              className="flex items-center gap-[var(--lsd-spacing-small)]"
             >
               <Button variant={isPodium ? 'filled' : 'outlined'} size="md">
                 Repository
@@ -246,7 +246,7 @@ function PlatformCard({ platform, globalIndex }: { platform: Platform; globalInd
 function LargeMetric({ label, value, Icon }: { label: string; value: string; Icon: PhosphorIcon }) {
   return (
     <div className="text-center">
-      <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-[var(--lsd-spacing-xs)]">
+      <div className="flex items-center justify-center gap-[var(--lsd-spacing-smallest)] text-[var(--lsd-primary)] mb-[var(--lsd-spacing-smallest)]">
         <Icon size={20} />
         <span className="font-[var(--font-display)] text-2xl font-bold">{value}</span>
       </div>
