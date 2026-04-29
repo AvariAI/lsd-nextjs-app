@@ -14,31 +14,29 @@ import {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-[var(--lsd-spacing-xl)]">
-      <div className="mx-auto max-w-4xl space-y-[var(--lsd-spacing-xl)]">
+    <main className="min-h-screen p-(--lsd-spacing-largest)">
+      <div className="mx-auto max-w-4xl space-y-(--lsd-spacing-largest)">
         {/* Hero Section */}
-        <div className="text-center space-y-[var(--lsd-spacing-md)]">
-          <h1 className="mb-[var(--lsd-spacing-md)] text-4xl font-bold">
-            Welcome to LSD + Next.js
-          </h1>
-          <p className="mb-[var(--lsd-spacing-lg)] text-lg text-[var(--lsd-muted-foreground)]">
+        <div className="text-center space-y-(--lsd-spacing-base)">
+          <h1 className="text-4xl font-bold text-(--lsd-text-primary)">Welcome to LSD + Next.js</h1>
+          <p className="text-lg text-(--lsd-text-secondary)">
             A modern design system integrated with Next.js, TypeScript, and TailwindCSS v4.
             Featuring 39 accessible, monochromatic components.
           </p>
-          <div className="flex gap-[var(--lsd-spacing-sm)] justify-center">
+          <div className="flex gap-(--lsd-spacing-smaller) justify-center">
             <Button variant="filled">Get Started</Button>
             <Button variant="outlined">Learn More</Button>
           </div>
         </div>
 
         {/* Feature Cards */}
-        <div className="grid gap-[var(--lsd-spacing-md)] md:grid-cols-3">
+        <div className="grid gap-(--lsd-spacing-base) md:grid-cols-3">
           <Card>
             <CardHeader>
               <CardTitle>Accessible</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-[var(--lsd-muted-foreground)]">
+              <p className="text-(--lsd-text-secondary)">
                 Fully keyboard navigable with ARIA attributes built-in.
               </p>
             </CardContent>
@@ -49,7 +47,7 @@ export default function Home() {
               <CardTitle>Monochromatic</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-[var(--lsd-muted-foreground)]">
+              <p className="text-(--lsd-text-secondary)">
                 Content-first design with semantic color tokens.
               </p>
             </CardContent>
@@ -60,16 +58,16 @@ export default function Home() {
               <CardTitle>Radix UI</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-[var(--lsd-muted-foreground)]">
+              <p className="text-(--lsd-text-secondary)">
                 Built on top of Radix UI primitives for reliability.
               </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Alerts and Badges Section */}
-        <div className="space-y-[var(--lsd-spacing-md)]">
-          <h2 className="text-2xl font-bold">Component Showcase</h2>
+        {/* Component Showcase Section */}
+        <div className="space-y-(--lsd-spacing-large)">
+          <h2 className="text-2xl font-bold text-(--lsd-text-primary)">Component Showcase</h2>
 
           <Alert>
             <AlertTitle>Information</AlertTitle>
@@ -78,7 +76,7 @@ export default function Home() {
             </AlertDescription>
           </Alert>
 
-          <div className="flex gap-[var(--lsd-spacing-sm)] flex-wrap">
+          <div className="flex gap-(--lsd-spacing-smaller) flex-wrap">
             <Badge>Default</Badge>
             <Badge variant="info">Info</Badge>
             <Badge variant="success">Success</Badge>
@@ -86,6 +84,18 @@ export default function Home() {
             <Badge variant="destructive">Destructive</Badge>
             <Badge variant="outlined">Outlined</Badge>
             <Badge variant="dot">Dot</Badge>
+          </div>
+        </div>
+
+        {/* Button Variants Section */}
+        <div className="space-y-(--lsd-spacing-base)">
+          <h2 className="text-2xl font-bold text-(--lsd-text-primary)">Button Variants</h2>
+          <div className="flex gap-(--lsd-spacing-smaller) flex-wrap">
+            <Button variant="filled">Filled</Button>
+            <Button variant="outlined">Outlined</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="success">Success</Button>
           </div>
         </div>
       </div>
