@@ -1,311 +1,308 @@
 'use client';
 
+import { Button, Card, CardContent, CardHeader, CardTitle } from '@nipsys/lsd';
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@nipsys/lsd';
-import { ArrowSquareOut, GitFork, Star } from '@phosphor-icons/react';
+  ArrowSquareOut,
+  ChatCircleText,
+  GitFork,
+  Lightning,
+  Star,
+  Trophy,
+  Users,
+} from '@phosphor-icons/react';
+import { type Platform, platforms } from '@/data/platforms';
 
-const AGENTS = [
-  {
-    rank: 1,
-    name: 'OpenClaw',
-    stars: 364000,
-    forks: 28450,
-    url: 'https://github.com/openclaw/openclaw',
-    description: 'Dominates the personal agent market with massive community adoption',
-  },
-  {
-    rank: 2,
-    name: 'Hermes',
-    stars: 119000,
-    forks: 14230,
-    url: 'https://github.com/nousresearch/hermes-agent',
-    description: 'Popular and growing in the market with strong development momentum',
-  },
-  {
-    rank: 3,
-    name: 'Ruflo',
-    stars: 33000,
-    forks: 2100,
-    url: 'https://github.com/ruflo/ruflo',
-    description: 'Solid contender with dedicated user base',
-  },
-  {
-    rank: 4,
-    name: 'oh-my-claudecode',
-    stars: 31000,
-    forks: 1950,
-    url: 'https://github.com/oh-my-claudecode',
-    description: 'Developer-focused agent with growing popularity',
-  },
-  {
-    rank: 5,
-    name: 'Mission Control',
-    stars: 4000,
-    forks: 280,
-    url: 'https://github.com/mission-control',
-    description: 'Emerging agent with unique capabilities',
-  },
-  {
-    rank: 6,
-    name: 'Bindu',
-    stars: 2,
-    forks: 0,
-    url: 'https://github.com/bindu',
-    description: 'New entrant in the agent ecosystem',
-  },
-  {
-    rank: 7,
-    name: 'GoClaw',
-    stars: 0,
-    forks: 0,
-    url: 'https://github.com/goclaw',
-    description: 'Upcoming Go-based agent project',
-  },
-];
-
-export default function LeaderboardNeobrutalist() {
-  const topAgent = AGENTS[0];
-  const marketStats = AGENTS[1];
-  const remainingAgents = AGENTS.slice(2);
-
-  const totalStars = AGENTS.reduce((sum, agent) => sum + agent.stars, 0);
+export default function NeoBrutalistLeaderboardPage() {
+  const topAgent = platforms.find(p => p.rank === 1);
+  const hermesAgent = platforms.find(p => p.name === 'Hermes');
+  const remainingAgents = platforms.filter(p => p.rank > 2);
 
   return (
-    <main className="min-h-screen bg-[var(--lsd-background)] p-[var(--lsd-spacing-largest)]">
-      <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <section className="mb-[var(--lsd-spacing-largest)]">
-          <h1 className="font-[var(--font-display)] text-7xl md:text-9xl font-black text-[var(--lsd-text-primary)] leading-none mb-[var(--lsd-spacing-base)]">
-            AGENT
-            <br />
-            LEADERBOARD
+    <main className="min-h-screen bg-[var(--lsd-background)] overflow-hidden">
+      {/* Decorative Grid Background */}
+      <div
+        className="fixed inset-0 opacity-5 pointer-events-none"
+        style={{
+          backgroundImage: `
+          linear-gradient(to right, var(--lsd-border) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--lsd-border) 1px, transparent 1px)
+        `,
+          backgroundSize: '64px 64px',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto p-[var(--lsd-spacing-largest)] relative">
+        {/* Header */}
+        <section className="mb-[var(--lsd-spacing-largest)] text-center">
+          <h1 className="text-[var(--lsd-text-primary)] text-6xl font-bold mb-[var(--lsd-spacing-base)]">
+            Personal AI Agent Leaderboard
           </h1>
-          <p className="text-xl text-[var(--lsd-text-secondary)] max-w-2xl">
-            The most popular personal AI agents ranked by community adoption
+          <p className="text-[var(--lsd-text-secondary)] text-xl max-w-3xl mx-auto">
+            Multi-channel AI orchestration platforms ranked by community adoption
           </p>
         </section>
 
-        {/* Floating Cards Grid */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--lsd-spacing-base)] mb-[var(--lsd-spacing-base)]">
-          {/* Large Card - Top Agent */}
+        {/* Hero Grid - Large Card + Narrow Card */}
+        <section className="mb-[var(--lsd-spacing-large)] grid grid-cols-1 lg:grid-cols-3 gap-[var(--lsd-spacing-large)]">
+          {/* Large Card - #1 Agent Desktop */}
           <div className="lg:col-span-2">
-            <Card className="h-full border-2 border-[var(--lsd-border)]">
-              <CardHeader className="pb-[var(--lsd-spacing-base)]">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-[var(--lsd-primary)] text-6xl font-black leading-none">
-                    #1
-                  </span>
-                  <CardTitle className="text-4xl font-black text-[var(--lsd-text-primary)]">
-                    {topAgent.name}
-                  </CardTitle>
-                </div>
-                <p className="text-lg text-[var(--lsd-text-secondary)]">{topAgent.description}</p>
+            <Card>
+              <CardHeader className="border-b border-[var(--lsd-border)]">
+                <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
+                  <Trophy size={32} className="text-[var(--lsd-primary)]" />
+                  <span className="text-2xl">Market Leader</span>
+                </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 text-[var(--lsd-primary)] mb-1">
-                      <Star size={24} weight="fill" />
-                      <span className="text-3xl font-bold">
-                        {(topAgent.stars / 1000).toFixed(0)}K
-                      </span>
+              <CardContent className="p-[var(--lsd-spacing-large)]">
+                <div className="space-y-[var(--lsd-spacing-base)]">
+                  {/* Rank Badge */}
+                  <div className="flex items-center gap-[var(--lsd-spacing-sm)]">
+                    <div className="bg-[var(--lsd-primary)] text-white px-4 py-2 rounded-lg">
+                      <span className="text-3xl font-bold">#1</span>
                     </div>
-                    <div className="text-sm text-[var(--lsd-text-secondary)] uppercase tracking-wider">
-                      Stars
+                    <span className="text-[var(--lsd-text-secondary)]">
+                      Dominates personal agent market
+                    </span>
+                  </div>
+
+                  {/* Agent Info */}
+                  <div>
+                    <h2 className="text-[var(--lsd-text-primary)] text-4xl font-bold mb-[var(--lsd-spacing-sm)]">
+                      {topAgent?.name}
+                    </h2>
+                    <p className="text-[var(--lsd-text-secondary)] text-lg">
+                      {topAgent?.description}
+                    </p>
+                  </div>
+
+                  {/* Key Metrics */}
+                  <div className="grid grid-cols-3 gap-[var(--lsd-spacing-base)] pt-[var(--lsd-spacing-base)] border-t border-[var(--lsd-border)]">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
+                        <Star size={24} />
+                      </div>
+                      <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
+                        {topAgent?.stars.toLocaleString()}
+                      </div>
+                      <div className="text-sm text-[var(--lsd-text-secondary)]">GitHub Stars</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
+                        <GitFork size={24} />
+                      </div>
+                      <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
+                        {topAgent?.forks.toLocaleString()}
+                      </div>
+                      <div className="text-sm text-[var(--lsd-text-secondary)]">Forks</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-primary)] mb-1">
+                        <ChatCircleText size={24} />
+                      </div>
+                      <div className="text-3xl font-bold text-[var(--lsd-text-primary)]">
+                        {topAgent?.channelCount}
+                      </div>
+                      <div className="text-sm text-[var(--lsd-text-secondary)]">Platforms</div>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 text-[var(--lsd-text-primary)] mb-1">
-                      <GitFork size={24} />
-                      <span className="text-3xl font-bold">
-                        {(topAgent.forks / 1000).toFixed(0)}K
-                      </span>
-                    </div>
-                    <div className="text-sm text-[var(--lsd-text-secondary)] uppercase tracking-wider">
-                      Forks
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 text-[var(--lsd-text-primary)] mb-1">
-                      <span className="text-3xl font-bold">
-                        {((topAgent.stars / totalStars) * 100).toFixed(0)}%
-                      </span>
-                    </div>
-                    <div className="text-sm text-[var(--lsd-text-secondary)] uppercase tracking-wider">
-                      Market Share
-                    </div>
-                  </div>
+
+                  {/* Action */}
+                  <a href={topAgent?.url} target="_blank" rel="noopener noreferrer">
+                    <Button variant="filled" size="lg" className="w-full">
+                      View {topAgent?.name} Repository
+                      <ArrowSquareOut size={18} />
+                    </Button>
+                  </a>
                 </div>
-                <a
-                  href={topAgent.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[var(--lsd-primary)] text-white px-6 py-3 font-semibold hover:opacity-90 transition-opacity"
-                >
-                  View Repository
-                  <ArrowSquareOut size={20} />
-                </a>
               </CardContent>
             </Card>
           </div>
 
-          {/* Narrow Card - Market Stats */}
-          <div className="lg:col-span-1">
-            <Card className="h-full border-2 border-[var(--lsd-border)]">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[var(--lsd-text-primary)] mb-2">
-                  Market Stats
+          {/* Narrow Card - Hermes Market Stats */}
+          <div>
+            <Card>
+              <CardHeader className="border-b border-[var(--lsd-border)]">
+                <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
+                  <Lightning size={24} className="text-[var(--lsd-primary)]" />
+                  <span className="text-xl">Market Stats</span>
                 </CardTitle>
-                <p className="text-[var(--lsd-text-secondary)]">Hermes Agent Position</p>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-[var(--lsd-text-secondary)]">Stars</span>
-                    <span className="text-2xl font-bold text-[var(--lsd-text-primary)]">
-                      {(marketStats.stars / 1000).toFixed(0)}K
-                    </span>
+              <CardContent className="p-[var(--lsd-spacing-large)]">
+                <div className="space-y-[var(--lsd-spacing-base)]">
+                  {/* Hermes Highlight */}
+                  <div className="bg-[var(--lsd-surface)] border border-[var(--lsd-border)] rounded-lg p-[var(--lsd-spacing-base)]">
+                    <h3 className="text-[var(--lsd-text-primary)] text-xl font-bold mb-2">
+                      {hermesAgent?.name}
+                    </h3>
+                    <p className="text-[var(--lsd-text-secondary)] text-sm mb-2">
+                      {hermesAgent?.description}
+                    </p>
+                    <div className="flex items-center gap-[var(--lsd-spacing-xs)]">
+                      <Star size={16} className="text-[var(--lsd-primary)]" />
+                      <span className="text-[var(--lsd-text-primary)] font-semibold">
+                        {hermesAgent?.stars.toLocaleString()} stars
+                      </span>
+                    </div>
                   </div>
-                  <div className="h-2 bg-[var(--lsd-border)] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[var(--lsd-primary)] rounded-full"
-                      style={{
-                        width: `${((marketStats.stars / topAgent.stars) * 100).toFixed(0)}%`,
-                      }}
+
+                  {/* Market Stats */}
+                  <div className="space-y-[var(--lsd-spacing-sm)]">
+                    <StatItem
+                      label="Total Agents"
+                      value={platforms.length.toString()}
+                      icon={<Users size={20} />}
+                    />
+                    <StatItem
+                      label="Total Stars"
+                      value={platforms.reduce((sum, p) => sum + p.stars, 0).toLocaleString()}
+                      icon={<Star size={20} />}
+                    />
+                    <StatItem
+                      label="Total Forks"
+                      value={platforms.reduce((sum, p) => sum + p.forks, 0).toLocaleString()}
+                      icon={<GitFork size={20} />}
+                    />
+                    <StatItem
+                      label="Avg Platforms"
+                      value={(
+                        platforms.reduce((sum, p) => sum + p.channelCount, 0) / platforms.length
+                      ).toFixed(1)}
+                      icon={<ChatCircleText size={20} />}
                     />
                   </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-[var(--lsd-text-secondary)]">Forks</span>
-                    <span className="text-2xl font-bold text-[var(--lsd-text-primary)]">
-                      {(marketStats.forks / 1000).toFixed(0)}K
-                    </span>
-                  </div>
-                  <div className="h-2 bg-[var(--lsd-border)] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[var(--lsd-primary)] rounded-full"
-                      style={{
-                        width: `${((marketStats.forks / topAgent.forks) * 100).toFixed(0)}%`,
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm text-[var(--lsd-text-secondary)]">Rank</span>
-                    <span className="text-2xl font-bold text-[var(--lsd-primary)]">#2</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[var(--lsd-border)]">
-                  <p className="text-sm text-[var(--lsd-text-secondary)]">
-                    {marketStats.description}
-                  </p>
                 </div>
               </CardContent>
             </Card>
           </div>
         </section>
 
-        {/* Full-width Table Card */}
+        {/* Full Width Table Card - Remaining Agents */}
         <section>
-          <Card className="border-2 border-[var(--lsd-border)]">
-            <CardHeader>
-              <CardTitle className="text-3xl font-black text-[var(--lsd-text-primary)]">
-                All Agents
+          <Card>
+            <CardHeader className="border-b border-[var(--lsd-border)]">
+              <CardTitle className="flex items-center gap-[var(--lsd-spacing-base)]">
+                <ChatCircleText size={28} className="text-[var(--lsd-primary)]" />
+                <span className="text-2xl">All Platforms</span>
               </CardTitle>
-              <p className="text-[var(--lsd-text-secondary)]">Complete rankings and metrics</p>
             </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="font-bold text-[var(--lsd-text-primary)] text-base">
+            <CardContent className="p-0">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-[var(--lsd-surface)] border-b border-[var(--lsd-border)]">
+                    <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
                       Rank
-                    </TableHead>
-                    <TableHead className="font-bold text-[var(--lsd-text-primary)] text-base">
-                      Agent
-                    </TableHead>
-                    <TableHead className="font-bold text-[var(--lsd-text-primary)] text-base text-center">
+                    </th>
+                    <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                      Platform
+                    </th>
+                    <th className="text-left p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
+                      Channels
+                    </th>
+                    <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
                       Stars
-                    </TableHead>
-                    <TableHead className="font-bold text-[var(--lsd-text-primary)] text-base text-center">
+                    </th>
+                    <th className="text-center p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
                       Forks
-                    </TableHead>
-                    <TableHead className="font-bold text-[var(--lsd-text-primary)] text-base text-right">
+                    </th>
+                    <th className="text-right p-[var(--lsd-spacing-base)] text-[var(--lsd-text-primary)] font-semibold">
                       Actions
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {remainingAgents.map(agent => (
-                    <TableRow key={agent.rank}>
-                      <TableCell className="font-mono font-bold text-[var(--lsd-primary)] text-lg">
-                        #{agent.rank}
-                      </TableCell>
-                      <TableCell>
-                        <div>
-                          <div className="font-bold text-[var(--lsd-text-primary)] text-lg">
-                            {agent.name}
-                          </div>
-                          <div className="text-sm text-[var(--lsd-text-secondary)] line-clamp-1">
-                            {agent.description}
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2 text-[var(--lsd-text-primary)]">
-                          <Star size={16} weight="fill" className="text-[var(--lsd-warning)]" />
-                          <span className="font-semibold">
-                            {agent.stars > 0 ? agent.stars.toLocaleString() : '0'}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-2 text-[var(--lsd-text-primary)]">
-                          <GitFork size={16} />
-                          <span className="font-semibold">
-                            {agent.forks > 0 ? agent.forks.toLocaleString() : '0'}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <a
-                          href={agent.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[var(--lsd-primary)] hover:underline font-semibold"
-                        >
-                          View
-                          <ArrowSquareOut size={16} />
-                        </a>
-                      </TableCell>
-                    </TableRow>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {remainingAgents.map((platform, index) => (
+                    <AgentTableRow key={platform.rank} platform={platform} index={index} />
                   ))}
-                </TableBody>
-              </Table>
+                </tbody>
+              </table>
             </CardContent>
           </Card>
         </section>
 
         {/* Footer */}
         <footer className="mt-[var(--lsd-spacing-largest)] text-center text-[var(--lsd-text-secondary)] text-sm">
-          <p>Powered by @nipsys/lsd • Data from GitHub • Updated Dec 2024</p>
+          <p>Powered by @nipsys/lsd • Data from GitHub API • Updated Dec 2024</p>
         </footer>
       </div>
     </main>
+  );
+}
+
+interface StatItemProps {
+  label: string;
+  value: string;
+  icon: React.ReactNode;
+}
+
+function StatItem({ label, value, icon }: StatItemProps) {
+  return (
+    <div className="flex items-center justify-between p-[var(--lsd-spacing-xs)] border-b border-[var(--lsd-border)]">
+      <div className="flex items-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-secondary)]">
+        <span className="text-[var(--lsd-primary)]">{icon}</span>
+        <span className="text-sm">{label}</span>
+      </div>
+      <span className="text-[var(--lsd-text-primary)] font-semibold">{value}</span>
+    </div>
+  );
+}
+
+interface AgentTableRowProps {
+  platform: Platform;
+  index: number;
+}
+
+function AgentTableRow({ platform, index }: AgentTableRowProps) {
+  const isLast = index === platform.rank - 3;
+
+  return (
+    <tr className={`border-b border-[var(--lsd-border)] ${isLast ? 'border-b-0' : ''}`}>
+      {/* Rank */}
+      <td className="p-[var(--lsd-spacing-base)]">
+        <span className="text-[var(--lsd-text-primary)] font-bold">#{platform.rank}</span>
+      </td>
+
+      {/* Platform Info */}
+      <td className="p-[var(--lsd-spacing-base)]">
+        <div className="space-y-[var(--lsd-spacing-xs)]">
+          <h3 className="text-[var(--lsd-text-primary)] font-semibold">{platform.name}</h3>
+          <p className="text-[var(--lsd-text-secondary)] text-sm line-clamp-2">
+            {platform.description}
+          </p>
+        </div>
+      </td>
+
+      {/* Channels */}
+      <td className="p-[var(--lsd-spacing-base)]">
+        <span className="text-[var(--lsd-text-primary)] text-sm">
+          {platform.channelCount} platforms
+        </span>
+      </td>
+
+      {/* Stars */}
+      <td className="p-[var(--lsd-spacing-base)] text-center">
+        <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-primary)]">
+          <Star size={16} className="text-[var(--lsd-primary)]" />
+          <span className="font-semibold">{platform.stars.toLocaleString()}</span>
+        </div>
+      </td>
+
+      {/* Forks */}
+      <td className="p-[var(--lsd-spacing-base)] text-center">
+        <div className="flex items-center justify-center gap-[var(--lsd-spacing-xs)] text-[var(--lsd-text-primary)]">
+          <GitFork size={16} className="text-[var(--lsd-primary)]" />
+          <span className="font-semibold">{platform.forks.toLocaleString()}</span>
+        </div>
+      </td>
+
+      {/* Actions */}
+      <td className="p-[var(--lsd-spacing-base)] text-right">
+        <a href={platform.url} target="_blank" rel="noopener noreferrer">
+          <Button variant="outlined" size="sm">
+            View
+            <ArrowSquareOut size={14} />
+          </Button>
+        </a>
+      </td>
+    </tr>
   );
 }
