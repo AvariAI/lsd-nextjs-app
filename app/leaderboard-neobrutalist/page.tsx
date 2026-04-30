@@ -83,16 +83,6 @@ export default function NeoBrutalistLeaderboardPage() {
                 Details
               </button>
             </div>
-
-            {/* About */}
-            <a
-              href="https://github.com/AvariAI/lsd-nextjs-app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[var(--lsd-text-secondary)] hover:text-[var(--lsd-primary)] transition-colors"
-            >
-              GitHub
-            </a>
           </div>
         </header>
 
