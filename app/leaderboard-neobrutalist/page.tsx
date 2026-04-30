@@ -1,15 +1,26 @@
 'use client';
 
-import { Button } from '@nipsys/lsd';
 import {
-  ArrowSquareOut,
-  ChatCircleText,
-  GitFork,
-  Layout,
-  List,
-  Star,
-  Trophy,
-  Users,
+  Badge,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@nipsys/lsd';
+import {
+  ArrowSquareOutIcon,
+  ChatCircleTextIcon,
+  GitForkIcon,
+  LayoutIcon,
+  ListIcon,
+  StarIcon,
+  TrophyIcon,
+  UsersIcon,
 } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { type Platform, platforms } from '@/data/platforms';
@@ -47,42 +58,30 @@ export default function NeoBrutalistLeaderboardPage() {
       <div className="min-h-screen flex flex-col bg-[var(--lsd-background)]">
         {/* Top Navigation Bar */}
         <header className="flex-shrink-0 bg-white border-b border-[var(--lsd-border)]">
-          <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
+          <div className="max-w-7xl mx-auto flex items-center justify-between px-(--lsd-spacing-large) py-(--lsd-spacing-smaller)">
             {/* Logo and Title */}
-            <div className="flex items-center gap-3">
-              <Trophy size={28} className="text-[var(--lsd-primary)]" />
+            <div className="flex items-center gap-(--lsd-spacing-small)">
+              <TrophyIcon size={28} className="text-[var(--lsd-primary)]" />
               <span className="text-xl font-bold text-[var(--lsd-text-primary)]">
                 Agent Leaderboard
               </span>
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-[var(--lsd-surface)] border border-[var(--lsd-border)] rounded-lg p-1">
-              <button
-                type="button"
-                onClick={() => setView('overview')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
-                  view === 'overview'
-                    ? 'bg-[var(--lsd-primary)] text-white'
-                    : 'text-[var(--lsd-text-secondary)] hover:text-[var(--lsd-text-primary)]'
-                }`}
-              >
-                <Layout size={16} />
+            <ToggleGroup
+              type="single"
+              value={view}
+              onValueChange={v => setView(v as 'overview' | 'details')}
+            >
+              <ToggleGroupItem value="overview" aria-label="Overview">
+                <LayoutIcon size={16} />
                 Overview
-              </button>
-              <button
-                type="button"
-                onClick={() => setView('details')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
-                  view === 'details'
-                    ? 'bg-[var(--lsd-primary)] text-white'
-                    : 'text-[var(--lsd-text-secondary)] hover:text-[var(--lsd-text-primary)]'
-                }`}
-              >
-                <List size={16} />
+              </ToggleGroupItem>
+              <ToggleGroupItem value="details" aria-label="Details">
+                <ListIcon size={16} />
                 Details
-              </button>
-            </div>
+              </ToggleGroupItem>
+            </ToggleGroup>
           </div>
         </header>
 
@@ -90,53 +89,53 @@ export default function NeoBrutalistLeaderboardPage() {
         {view === 'overview' ? (
           <>
             {/* Hero Section - #1 Platform */}
-            <section className="bg-white py-16 px-8">
+            <section className="bg-white py-[64px] px-(--lsd-spacing-large)">
               <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row items-center gap-12">
+                <div className="flex flex-col lg:flex-row items-center gap-[48px]">
                   {/* Left - Big Title */}
                   <div className="lg:w-1/2 text-center lg:text-left">
-                    <div className="inline-flex items-center gap-2 bg-[var(--lsd-primary)] text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                      <Trophy size={16} />
+                    <div className="inline-flex items-center gap-(--lsd-spacing-smaller) bg-[var(--lsd-primary)] text-white px-(--lsd-spacing-base) py-(--lsd-spacing-smallest) rounded-full text-sm font-semibold mb-[--lsd-spacing-base]">
+                      <TrophyIcon size={16} />
                       MARKET LEADER
                     </div>
-                    <h1 className="text-6xl font-bold text-[var(--lsd-text-primary)] mb-4 tracking-tight">
+                    <h1 className="text-6xl font-bold text-[var(--lsd-text-primary)] mb-[--lsd-spacing-base] tracking-tight">
                       {topAgent?.name}
                     </h1>
-                    <p className="text-2xl text-[var(--lsd-text-secondary)] mb-8">
+                    <p className="text-2xl text-[var(--lsd-text-secondary)] mb-[--lsd-spacing-larger]">
                       {topAgent?.description}
                     </p>
-                    <div className="flex gap-4 justify-center lg:justify-start">
+                    <div className="flex gap-[--lsd-spacing-base] justify-center lg:justify-start">
                       <a href={topAgent?.url} target="_blank" rel="noopener noreferrer">
                         <Button variant="filled" size="lg">
                           View Repository
-                          <ArrowSquareOut size={18} />
+                          <ArrowSquareOutIcon size={18} />
                         </Button>
                       </a>
                     </div>
                   </div>
 
                   {/* Right - Key Stats */}
-                  <div className="lg:w-1/2 grid grid-cols-2 gap-6">
+                  <div className="lg:w-1/2 grid grid-cols-2 gap-[--lsd-spacing-base]">
                     <StatCard
                       label="GitHub Stars"
                       value={topAgent?.stars.toLocaleString() || '0'}
-                      icon={<Star size={24} />}
+                      icon={<StarIcon size={24} />}
                       highlight
                     />
                     <StatCard
                       label="Forks"
                       value={topAgent?.forks.toLocaleString() || '0'}
-                      icon={<GitFork size={24} />}
+                      icon={<GitForkIcon size={24} />}
                     />
                     <StatCard
                       label="Platforms"
                       value={topAgent?.channelCount.toString() || '0'}
-                      icon={<ChatCircleText size={24} />}
+                      icon={<ChatCircleTextIcon size={24} />}
                     />
                     <StatCard
                       label="Contributors"
                       value={topAgent?.contributors.toLocaleString() || '0'}
-                      icon={<Users size={24} />}
+                      icon={<UsersIcon size={24} />}
                       highlight
                     />
                   </div>
@@ -145,28 +144,30 @@ export default function NeoBrutalistLeaderboardPage() {
             </section>
 
             {/* Dark Dashboard Section - #2 Platform */}
-            <section className="bg-[var(--lsd-surface)] py-12 px-8">
+            <section className="bg-[var(--lsd-surface)] py-[48px] px-(--lsd-spacing-large)">
               <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row items-start gap-8">
+                <div className="flex flex-col lg:flex-row items-start gap-[32px]">
                   {/* Left - Platform Info */}
                   <div className="lg:w-1/3">
-                    <div className="text-sm text-[var(--lsd-text-secondary)] mb-2">RUNNER UP</div>
-                    <h2 className="text-4xl font-bold text-[var(--lsd-text-primary)] mb-3">
+                    <div className="text-sm text-[var(--lsd-text-secondary)] mb-[--lsd-spacing-smaller]">
+                      RUNNER UP
+                    </div>
+                    <h2 className="text-4xl font-bold text-[var(--lsd-text-primary)] mb-[--lsd-spacing-smaller]">
                       {secondAgent?.name}
                     </h2>
-                    <p className="text-[var(--lsd-text-secondary)] mb-6">
+                    <p className="text-[var(--lsd-text-secondary)] mb-[--lsd-spacing-base]">
                       {secondAgent?.description}
                     </p>
                     <a href={secondAgent?.url} target="_blank" rel="noopener noreferrer">
                       <Button variant="outlined" size="md">
                         View Repository
-                        <ArrowSquareOut size={16} />
+                        <ArrowSquareOutIcon size={16} />
                       </Button>
                     </a>
                   </div>
 
                   {/* Right - Dashboard Metrics */}
-                  <div className="lg:w-2/3 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="lg:w-2/3 grid grid-cols-2 lg:grid-cols-4 gap-[--lsd-spacing-base]">
                     <DashboardMetric
                       label="Stars"
                       value={secondAgent?.stars.toLocaleString() || '0'}
@@ -193,12 +194,12 @@ export default function NeoBrutalistLeaderboardPage() {
             </section>
 
             {/* Bottom 5 Cards - Platforms #3-7 */}
-            <section className="bg-[var(--lsd-background)] py-12 px-8 flex-1">
+            <section className="bg-[var(--lsd-background)] py-[48px] px-(--lsd-spacing-large) flex-1">
               <div className="max-w-7xl mx-auto">
-                <h3 className="text-lg font-semibold text-[var(--lsd-text-primary)] mb-6">
+                <h3 className="text-lg font-semibold text-[var(--lsd-text-primary)] mb-[--lsd-spacing-larger]">
                   Emerging Platforms
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[--lsd-spacing-base]">
                   {nextFiveAgents.map(platform => (
                     <PlatformCard key={platform.rank} platform={platform} />
                   ))}
@@ -208,108 +209,85 @@ export default function NeoBrutalistLeaderboardPage() {
           </>
         ) : (
           /* Details View - Table */
-          <section className="py-12 px-8 flex-1">
+          <section className="py-[48px] px-(--lsd-spacing-large) flex-1">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl font-bold text-[var(--lsd-text-primary)] mb-6">
+              <h2 className="text-2xl font-bold text-[var(--lsd-text-primary)] mb-[--lsd-spacing-larger]">
                 All Platforms
               </h2>
               <div className="bg-[var(--lsd-surface)] border border-[var(--lsd-border)] rounded-lg overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-[var(--lsd-background)] border-b border-[var(--lsd-border)]">
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Rank
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Platform
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Stars
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Forks
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Contributors
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Channels
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Language
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-[var(--lsd-text-primary)]">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Rank</TableHead>
+                      <TableHead>Platform</TableHead>
+                      <TableHead>Stars</TableHead>
+                      <TableHead>Forks</TableHead>
+                      <TableHead>Contributors</TableHead>
+                      <TableHead>Channels</TableHead>
+                      <TableHead>Language</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {platforms.map(platform => (
-                      <tr
-                        key={platform.rank}
-                        className="border-b border-[var(--lsd-border)] last:border-b-0 hover:bg-[var(--lsd-background)] transition-colors"
-                      >
-                        <td className="px-6 py-4 text-sm font-bold text-[var(--lsd-text-primary)]">
-                          #{platform.rank}
-                        </td>
-                        <td className="px-6 py-4">
+                      <TableRow key={platform.rank}>
+                        <TableCell className="font-bold">#{platform.rank}</TableCell>
+                        <TableCell>
                           <div>
-                            <div className="text-sm font-semibold text-[var(--lsd-text-primary)]">
+                            <div className="font-semibold text-[var(--lsd-text-primary)]">
                               {platform.name}
                             </div>
                             <div className="text-xs text-[var(--lsd-text-secondary)] mt-1">
                               {platform.repository}
                             </div>
                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-primary)]">
-                            <Star size={14} className="text-[var(--lsd-primary)]" />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm">
+                            <StarIcon size={14} className="text-[var(--lsd-primary)]" />
                             <span>{platform.stars.toLocaleString()}</span>
                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-primary)]">
-                            <GitFork size={14} />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm">
+                            <GitForkIcon size={14} />
                             <span>{platform.forks.toLocaleString()}</span>
                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-primary)]">
-                            <Users size={14} />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm">
+                            <UsersIcon size={14} />
                             <span>{platform.contributors.toLocaleString()}</span>
                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-primary)]">
-                            <ChatCircleText size={14} />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm">
+                            <ChatCircleTextIcon size={14} />
                             <span>{platform.channelCount}</span>
                           </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="text-xs px-2 py-1 bg-[var(--lsd-primary)] text-white rounded">
-                            {platform.language}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="filled">{platform.language}</Badge>
+                        </TableCell>
+                        <TableCell>
                           <a href={platform.url} target="_blank" rel="noopener noreferrer">
                             <Button variant="outlined" size="sm">
                               View
-                              <ArrowSquareOut size={12} />
+                              <ArrowSquareOutIcon size={12} />
                             </Button>
                           </a>
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </div>
             </div>
           </section>
         )}
 
         {/* Footer */}
-        <footer className="flex-shrink-0 bg-[var(--lsd-surface)] border-t border-[var(--lsd-border)] py-4 px-8">
+        <footer className="flex-shrink-0 bg-[var(--lsd-surface)] border-t border-[var(--lsd-border)] py-[--lsd-spacing-base] px-(--lsd-spacing-large)">
           <div className="max-w-7xl mx-auto text-center text-sm text-[var(--lsd-text-secondary)]">
             Powered by @nipsys/lsd • Data from GitHub API • Updated Apr 2026
           </div>
@@ -337,9 +315,9 @@ function StatCard({
   const subColor = highlight ? 'text-white/80' : 'text-[var(--lsd-text-secondary)]';
 
   return (
-    <div className={`p-6 rounded-xl ${bgClass}`}>
-      <div className={`mb-2 ${iconColor}`}>{icon}</div>
-      <div className={`text-3xl font-bold mb-1 ${textColor}`}>{value}</div>
+    <div className={`p-[--lsd-spacing-larger] rounded-xl ${bgClass}`}>
+      <div className={`mb-[--lsd-spacing-smaller] ${iconColor}`}>{icon}</div>
+      <div className={`text-3xl font-bold mb-[--lsd-spacing-smallest] ${textColor}`}>{value}</div>
       <div className={`text-sm ${subColor}`}>{label}</div>
     </div>
   );
@@ -356,8 +334,10 @@ function DashboardMetric({
   subtext: string;
 }) {
   return (
-    <div className="bg-[var(--lsd-background)] rounded-lg p-4 border border-[var(--lsd-border)]">
-      <div className="text-xs text-[var(--lsd-text-secondary)] mb-1">{label}</div>
+    <div className="bg-[var(--lsd-background)] rounded-lg p-[--lsd-spacing-base] border border-[var(--lsd-border)]">
+      <div className="text-xs text-[var(--lsd-text-secondary)] mb-[--lsd-spacing-smallest]">
+        {label}
+      </div>
       <div className="text-2xl font-bold text-[var(--lsd-text-primary)]">{value}</div>
       <div className="text-xs text-[var(--lsd-text-secondary)]">{subtext}</div>
     </div>
@@ -371,18 +351,20 @@ function PlatformCard({ platform }: { platform: Platform }) {
       href={platform.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block p-4 bg-[var(--lsd-surface)] rounded-xl border border-[var(--lsd-border)] hover:border-[var(--lsd-primary)] transition-colors group"
+      className="block p-[--lsd-spacing-base] bg-[var(--lsd-surface)] rounded-xl border border-[var(--lsd-border)] hover:border-[var(--lsd-primary)] transition-colors group"
     >
-      <div className="text-xs text-[var(--lsd-text-secondary)] mb-1">#{platform.rank}</div>
-      <div className="font-semibold text-[var(--lsd-text-primary)] mb-2 group-hover:text-[var(--lsd-primary)]">
+      <div className="text-xs text-[var(--lsd-text-secondary)] mb-[--lsd-spacing-smallest]">
+        #{platform.rank}
+      </div>
+      <div className="font-semibold text-[var(--lsd-text-primary)] mb-[--lsd-spacing-smaller] group-hover:text-[var(--lsd-primary)]">
         {platform.name}
       </div>
       <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-secondary)]">
-        <Star size={12} />
+        <StarIcon size={12} />
         <span>{platform.stars.toLocaleString()}</span>
       </div>
-      <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-secondary)] mt-1">
-        <ChatCircleText size={12} />
+      <div className="flex items-center gap-1 text-sm text-[var(--lsd-text-secondary)] mt-[--lsd-spacing-smallest]">
+        <ChatCircleTextIcon size={12} />
         <span>{platform.channelCount} platforms</span>
       </div>
     </a>
