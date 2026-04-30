@@ -9,7 +9,14 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '@nipsys/lsd';
-import { ArrowSquareOut, ChatCircleText, GitFork, Star, Trophy } from '@phosphor-icons/react';
+import {
+  ArrowSquareOut,
+  ChatCircleText,
+  GitFork,
+  Star,
+  Trophy,
+  Users,
+} from '@phosphor-icons/react';
 import { useEffect } from 'react';
 import { type Platform, platforms } from '@/data/platforms';
 
@@ -151,7 +158,12 @@ export default function NeoBrutalistLeaderboardPage() {
                   value={topAgent?.channelCount.toString() || '0'}
                   icon={<ChatCircleText size={24} />}
                 />
-                <StatCard label="Rank" value="#1" icon={<Trophy size={24} />} highlight />
+                <StatCard
+                  label="Contributors"
+                  value={topAgent?.contributors.toLocaleString() || '0'}
+                  icon={<Users size={24} />}
+                  highlight
+                />
               </div>
             </div>
           </div>
@@ -194,9 +206,9 @@ export default function NeoBrutalistLeaderboardPage() {
                   subtext="Platforms"
                 />
                 <DashboardMetric
-                  label="Market Share"
-                  value={`${Math.round(((secondAgent?.stars || 0) / platforms.reduce((s, p) => s + p.stars, 0)) * 100)}%`}
-                  subtext="of total stars"
+                  label="Contributors"
+                  value={secondAgent?.contributors.toLocaleString() || '0'}
+                  subtext="Active dev"
                 />
               </div>
             </div>

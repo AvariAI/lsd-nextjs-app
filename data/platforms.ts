@@ -4,6 +4,7 @@ export interface Platform {
   repository: string;
   stars: number;
   forks: number;
+  contributors: number;
   lastCommit: string;
   language: string;
   channels: string[];
@@ -19,6 +20,7 @@ export const platforms: Platform[] = [
     repository: 'openclaw/openclaw',
     stars: 366000,
     forks: 28500,
+    contributors: 412,
     lastCommit: '2026-04-29',
     language: 'TypeScript',
     channels: [
@@ -49,6 +51,7 @@ export const platforms: Platform[] = [
     repository: 'nousresearch/hermes-agent',
     stars: 125000,
     forks: 18600,
+    contributors: 89,
     lastCommit: '2026-04-28',
     language: 'TypeScript',
     channels: [
@@ -75,6 +78,7 @@ export const platforms: Platform[] = [
     repository: 'HKUDS/nanobot',
     stars: 41300,
     forks: 7200,
+    contributors: 47,
     lastCommit: '2026-04-27',
     language: 'Python',
     channels: ['Telegram', 'Discord', 'WeChat', 'Feishu', 'Slack', 'Email', 'Matrix'],
@@ -89,6 +93,7 @@ export const platforms: Platform[] = [
     repository: 'zeroclaw-labs/zeroclaw',
     stars: 30800,
     forks: 4500,
+    contributors: 34,
     lastCommit: '2026-04-19',
     language: 'Rust',
     channels: ['Discord', 'Telegram', 'Matrix', 'Email', 'Webhooks', 'CLI', 'Voice'],
@@ -103,6 +108,7 @@ export const platforms: Platform[] = [
     repository: 'qwibitai/nanoclaw',
     stars: 28100,
     forks: 12700,
+    contributors: 56,
     lastCommit: '2026-04-25',
     language: 'Python',
     channels: [
@@ -127,6 +133,7 @@ export const platforms: Platform[] = [
     repository: 'leon-ai/leon',
     stars: 17000,
     forks: 1400,
+    contributors: 78,
     lastCommit: '2026-04-20',
     language: 'TypeScript',
     channels: ['Web UI', 'Voice (TTS/STT)'],
@@ -141,6 +148,7 @@ export const platforms: Platform[] = [
     repository: 'agentscope-ai/QwenPaw',
     stars: 16100,
     forks: 2200,
+    contributors: 42,
     lastCommit: '2026-04-28',
     language: 'Python',
     channels: ['DingTalk', 'Feishu', 'WeChat', 'Discord', 'Telegram', 'QQ', 'iMessage'],
